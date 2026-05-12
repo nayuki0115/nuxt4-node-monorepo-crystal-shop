@@ -1,0 +1,12 @@
+{
+  "name": "crystal-shop",
+  "private": true,
+  "scripts": {
+    "dev:storefront": "pnpm --filter storefront dev",
+    "dev:api": "pnpm --filter api dev",
+    "dev": "pnpm --parallel --filter storefront --filter api dev",
+    "build:storefront": "pnpm --filter storefront build",
+    "build:api": "pnpm --filter api build",
+    "typecheck": "pnpm -r typecheck"
+  }
+}

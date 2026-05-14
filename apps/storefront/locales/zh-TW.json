@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "home": "首頁",
+    "products": "商品",
+    "categories": "分類",
+    "about": "關於我們"
+  },
+  "hero": {
+    "title": "夢幻水晶世界",
+    "subtitle": "發現純淨與優雅的結晶",
+    "cta": "探索商品"
+  },
+  "products": {
+    "title": "精選商品",
+    "search": "搜尋商品...",
+    "filter": "篩選",
+    "all": "全部"
+  },
+  "categories": {
+    "title": "商品分類"
+  },
+  "about": {
+    "title": "關於我們",
+    "story": "我們致力於提供最純淨、最優雅的水晶產品..."
+  }
+}

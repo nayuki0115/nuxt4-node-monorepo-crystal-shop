@@ -56,6 +56,29 @@ app.get('/products/:slug', (c) => {
   return c.json(product)
 })
 
+app.get('/products/id/:id', (c) => {
+  const id = c.req.param('id')
+
+  const products = readProductsFromExcel()
+
+  const product = products.find(
+    (item) =>
+      item.id === id &&
+      item.status === 'active'
+  )
+
+  if (!product) {
+    return c.json(
+      {
+        message: 'Product not found'
+      },
+      404
+    )
+  }
+
+  return c.json(product)
+})
+
 app.get('/categories', (c) => {
   return c.json(readCategoriesFromExcel())
 })

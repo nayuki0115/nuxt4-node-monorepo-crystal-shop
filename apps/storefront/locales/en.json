@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "about": "About"
+  },
+  "hero": {
+    "title": "Dreamy Crystal World",
+    "subtitle": "Discover Pure and Elegant Crystals",
+    "cta": "Explore Products"
+  },
+  "products": {
+    "title": "Featured Products",
+    "search": "Search products...",
+    "filter": "Filter",
+    "all": "All"
+  },
+  "categories": {
+    "title": "Product Categories"
+  },
+  "about": {
+    "title": "About Us",
+    "story": "We are dedicated to providing the purest and most elegant crystal products..."
+  }
+}

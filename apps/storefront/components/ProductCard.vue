@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="`/products/${product.id}`"
+    :to="`/products/${product.slug}`"
     class="group glassmorphism crystal-sheen soft-shadow relative block rounded-[1.75rem] p-6 transition-all duration-500 hover:-translate-y-2 hover:bg-white/50 hover:shadow-[0_28px_90px_rgba(149,113,190,0.22),0_0_46px_rgba(190,220,255,0.28)]"
   >
     <!-- Product Image -->

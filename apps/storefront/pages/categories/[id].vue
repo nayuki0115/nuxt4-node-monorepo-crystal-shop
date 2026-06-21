@@ -37,7 +37,7 @@ import type { Category, Product } from '../../../../packages/types/src/index'
 const route = useRoute()
 const { getLocalizedName } = useCategory()
 
-const categoryId = computed(() => String(route.params.slug))
+const categoryId = computed(() => String(route.params.id))
 
 const { data: categories } = await useFetch<Category[]>('http://localhost:4000/categories', {
   default: () => []

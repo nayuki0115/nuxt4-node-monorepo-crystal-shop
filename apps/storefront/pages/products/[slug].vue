@@ -68,7 +68,11 @@ import type { Product } from '../../../../packages/types/src/index'
 const route = useRoute()
 const { getLocalizedName, getLocalizedDescription, getProductTags } = useProduct()
 
-const { data: product, pending } = await useFetch<Product>(`http://localhost:4000/products/id/${route.params.id}`)
+const productSlug = computed(() => String(route.params.slug))
+
+const { data: product, pending } = await useFetch<Product>(
+  () => `http://localhost:4000/products/${productSlug.value}`
+)
 
 const localizedName = computed(() => product.value ? getLocalizedName(product.value) : '')
 const localizedDescription = computed(() => product.value ? getLocalizedDescription(product.value) : '')

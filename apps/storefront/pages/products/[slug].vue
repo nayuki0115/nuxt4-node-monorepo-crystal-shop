@@ -8,7 +8,7 @@
         <!-- Product Image -->
         <div class="glassmorphism p-8 rounded-3xl">
           <img
-            :src="product.imageUrl"
+            :src="productImageUrl"
             :alt="localizedName"
             class="w-full h-96 object-cover rounded-2xl crystal-glow"
           >
@@ -18,7 +18,7 @@
         <div class="space-y-6">
           <div>
             <h1 class="text-4xl font-light text-purple-800 mb-4">{{ localizedName }}</h1>
-            <p class="text-2xl text-purple-600 font-medium">${{ product.price }}</p>
+            <p class="text-2xl text-purple-600 font-medium">{{ formattedPrice }}</p>
           </div>
 
           <!-- Tags -->
@@ -66,7 +66,7 @@
 import type { Product } from '../../../../packages/types/src/index'
 
 const route = useRoute()
-const { getLocalizedName, getLocalizedDescription, getProductTags } = useProduct()
+const { getLocalizedName, getLocalizedDescription, getProductTags, formatPrice, getProductImageUrl } = useProduct()
 
 const productSlug = computed(() => String(route.params.slug))
 
@@ -77,4 +77,6 @@ const { data: product, pending } = await useFetch<Product>(
 const localizedName = computed(() => product.value ? getLocalizedName(product.value) : '')
 const localizedDescription = computed(() => product.value ? getLocalizedDescription(product.value) : '')
 const productTags = computed(() => product.value ? getProductTags(product.value) : [])
+const formattedPrice = computed(() => product.value ? formatPrice(product.value.price) : '')
+const productImageUrl = computed(() => product.value ? getProductImageUrl(product.value) : '')
 </script>

@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for dreamy crystal theme */
+@layer base {
+  html {
+    @apply bg-moonlight-blue-50 text-mist-purple-950;
+  }
+
+  body {
+    @apply min-h-screen overflow-x-hidden bg-[radial-gradient(circle_at_15%_10%,rgba(231,214,255,0.72),transparent_32%),radial-gradient(circle_at_85%_8%,rgba(190,220,255,0.56),transparent_28%),radial-gradient(circle_at_50%_92%,rgba(255,224,234,0.64),transparent_34%),linear-gradient(135deg,#fffbff_0%,#fbf7ff_38%,#f7fbff_72%,#fffaf1_100%)] antialiased;
+  }
+}
+
+@layer components {
+  .glassmorphism {
+    @apply border border-white/55 bg-white/35 shadow-[0_24px_70px_rgba(149,113,190,0.16),inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-2xl;
+  }
+
+  .crystal-glow {
+    @apply shadow-[0_0_38px_rgba(213,186,255,0.46),0_0_86px_rgba(190,220,255,0.34),0_18px_70px_rgba(245,214,150,0.22)];
+  }
+
+  .soft-shadow {
+    @apply shadow-[0_20px_60px_rgba(149,113,190,0.12)];
+  }
+
+  .crystal-sheen {
+    @apply relative overflow-hidden;
+  }
+
+  .crystal-sheen::before {
+    content: "";
+    @apply pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent;
+  }
+
+  .crystal-sheen::after {
+    content: "";
+    @apply pointer-events-none absolute -right-20 -top-24 h-44 w-44 rounded-full bg-champagne-gold-200/20 blur-3xl transition-opacity duration-500;
+  }
+}

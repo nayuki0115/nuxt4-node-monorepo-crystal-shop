@@ -14,13 +14,35 @@
     "title": "精選商品",
     "search": "搜尋商品...",
     "filter": "篩選",
-    "all": "全部"
+    "all": "全部",
+    "loadError": "商品載入失敗，請稍後再試。",
+    "emptyFeatured": "目前沒有精選商品。"
   },
   "categories": {
-    "title": "商品分類"
+    "title": "商品分類",
+    "description": "探索我們的 {category} 系列"
   },
   "about": {
     "title": "關於我們",
-    "story": "我們致力於提供最純淨、最優雅的水晶產品..."
+    "story": "我們致力於提供最純淨、最優雅的水晶產品...",
+    "storyEnergy": "我們相信每一個水晶都承載著獨特的能量與故事。從精心挑選的原石，到手工雕琢的成品，每一個步驟都充滿了對品質的堅持與對美的追求。",
+    "storyClosing": "讓我們一起探索這個閃耀的水晶世界，發現屬於你的那一份純淨與優雅。",
+    "values": {
+      "quality": {
+        "icon": "✨",
+        "title": "純淨品質",
+        "description": "嚴選優質水晶原石"
+      },
+      "craft": {
+        "icon": "🎨",
+        "title": "手工匠藝",
+        "description": "精湛工藝雕琢每件作品"
+      },
+      "energy": {
+        "icon": "💫",
+        "title": "能量傳遞",
+        "description": "帶給你正面的能量"
+      }
+    }
   }
 }

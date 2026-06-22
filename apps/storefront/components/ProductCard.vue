@@ -65,9 +65,10 @@ const props = defineProps<{
 }>()
 
 const { getLocalizedName, getProductTags, formatPrice, getProductImageUrl } = useProduct()
+const localePath = useLocalePath()
 
 const product = computed(() => props.product)
-const productPath = computed(() => `/products/${encodeURIComponent(props.product.slug)}`)
+const productPath = computed(() => localePath(`/products/${encodeURIComponent(props.product.slug)}`))
 const localizedName = computed(() => getLocalizedName(props.product))
 const productTags = computed(() => getProductTags(props.product))
 const formattedPrice = computed(() => formatPrice(props.product.price))

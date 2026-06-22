@@ -1,4 +1,6 @@
-export type Locale = 'zh-TW' | 'en'
+import type { AppLocale } from '../../i18n/src/index'
+
+export type Locale = AppLocale
 
 export type Product = {
   id: string

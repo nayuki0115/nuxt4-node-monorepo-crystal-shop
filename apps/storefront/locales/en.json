@@ -14,13 +14,35 @@
     "title": "Featured Products",
     "search": "Search products...",
     "filter": "Filter",
-    "all": "All"
+    "all": "All",
+    "loadError": "Unable to load products. Please try again later.",
+    "emptyFeatured": "No featured products are available right now."
   },
   "categories": {
-    "title": "Product Categories"
+    "title": "Product Categories",
+    "description": "Explore our {category} collection"
   },
   "about": {
     "title": "About Us",
-    "story": "We are dedicated to providing the purest and most elegant crystal products..."
+    "story": "We are dedicated to providing the purest and most elegant crystal products...",
+    "storyEnergy": "We believe every crystal carries its own unique energy and story. From carefully selected raw stones to handcrafted finished pieces, every step reflects our commitment to quality and beauty.",
+    "storyClosing": "Join us in exploring this radiant crystal world and discover the purity and elegance meant for you.",
+    "values": {
+      "quality": {
+        "icon": "✨",
+        "title": "Pure Quality",
+        "description": "Carefully selected premium crystal stones"
+      },
+      "craft": {
+        "icon": "🎨",
+        "title": "Handcrafted Artistry",
+        "description": "Fine craftsmanship shapes every piece"
+      },
+      "energy": {
+        "icon": "💫",
+        "title": "Positive Energy",
+        "description": "Bringing uplifting energy into your day"
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { getLocalizedValue } from '../../../packages/i18n/src/index'
 import type { Product } from '../../../packages/types/src/index'
 
 const productImages = import.meta.glob<string>(
@@ -19,14 +20,14 @@ const productImageBySlug = Object.fromEntries(
 )
 
 export const useProduct = () => {
-  const { $i18n } = useNuxtApp()
+  const { locale } = useI18n()
 
   const getLocalizedName = (product: Product) => {
-    return product.name[$i18n.locale as 'zh-TW' | 'en'] || product.name['zh-TW']
+    return getLocalizedValue(product.name, locale.value) ?? ''
   }
 
   const getLocalizedDescription = (product: Product) => {
-    return product.description?.[$i18n.locale as 'zh-TW' | 'en'] || product.description?.['zh-TW'] || ''
+    return product.description ? getLocalizedValue(product.description, locale.value) ?? '' : ''
   }
 
   const getProductTags = (product: Product) => {

@@ -44,23 +44,23 @@
                 {{ group.label }}
               </p>
               <p class="mt-1 text-xs text-mist-purple-500">
-                {{ group.tags.length }} options
+                {{ t('products.optionsCount', { count: group.tags.length }) }}
               </p>
             </div>
 
             <div class="flex flex-wrap gap-2">
               <button
                 v-for="tag in group.tags"
-                :key="`${group.key}-${tag}`"
-                @click="toggleTag(tag)"
+                :key="`${group.key}-${tag.value}`"
+                @click="toggleTag(tag.value)"
                 :class="[
                   'rounded-full border px-3 py-1.5 text-sm transition-all duration-300',
-                  selectedTags.includes(tag)
+                  selectedTags.includes(tag.value)
                     ? 'border-champagne-gold-300 bg-champagne-gold-200/70 text-mist-purple-950 shadow-[0_10px_28px_rgba(198,156,76,0.18)]'
                     : 'border-white/60 bg-white/40 text-mist-purple-700 hover:bg-white/65'
                 ]"
               >
-                {{ tag }}
+                {{ tag.label }}
               </button>
             </div>
           </div>
@@ -75,7 +75,7 @@
                 :key="`selected-${tag}`"
                 class="rounded-full bg-mist-purple-100/70 px-3 py-1 text-xs text-mist-purple-800"
               >
-                {{ tag }}
+                {{ getLocalizedTag(tag) }}
               </span>
             </div>
 
@@ -83,7 +83,7 @@
               class="self-start rounded-full border border-white/70 bg-white/45 px-4 py-2 text-sm text-mist-purple-700 transition hover:bg-white/70 sm:self-auto"
               @click="clearFilters"
             >
-              Clear filters
+              {{ t('products.clearFilters') }}
             </button>
           </div>
         </div>
@@ -105,7 +105,7 @@
 
       <!-- No results -->
       <div v-else-if="filteredProducts.length === 0" class="text-center py-12">
-        <p class="text-purple-600 text-lg">No products found</p>
+        <p class="text-purple-600 text-lg">{{ t('products.emptyList') }}</p>
       </div>
     </div>
   </div>
@@ -115,13 +115,23 @@
 import type { Category, Product } from '../../../../packages/types/src/index'
 
 const { t } = useI18n()
-const { getLocalizedName: getLocalizedProductName, getLocalizedDescription, getProductTags } = useProduct()
+const {
+  getLocalizedName: getLocalizedProductName,
+  getLocalizedDescription,
+  getLocalizedTag,
+  getProductTagValues
+} = useProduct()
 const { getLocalizedName: getLocalizedCategoryName } = useCategory()
+
+type TagOption = {
+  value: string
+  label: string
+}
 
 type TagGroup = {
   key: 'crystal' | 'color' | 'energy'
   label: string
-  tags: string[]
+  tags: TagOption[]
 }
 
 const searchInput = ref('')
@@ -146,7 +156,7 @@ const filteredProducts = computed(() => {
 
     const matchesCategory = !selectedCategory.value || product.category === selectedCategory.value
 
-    const productTags = getProductTags(product)
+    const productTags = getProductTagValues(product)
     const matchesTags = selectedTags.value.length === 0 ||
       selectedTags.value.every(tag => productTags.includes(tag))
 
@@ -155,23 +165,28 @@ const filteredProducts = computed(() => {
 })
 
 const getUniqueTags = (getTags: (product: Product) => string[]) => {
-  return [...new Set(products.value.flatMap(getTags))].sort((a, b) => a.localeCompare(b))
+  return [...new Set(products.value.flatMap(getTags))]
+    .sort((a, b) => getLocalizedTag(a).localeCompare(getLocalizedTag(b)))
+    .map((tag) => ({
+      value: tag,
+      label: getLocalizedTag(tag)
+    }))
 }
 
 const tagGroups = computed<TagGroup[]>(() => [
   {
     key: 'crystal',
-    label: 'Crystal',
+    label: t('products.filters.crystal'),
     tags: getUniqueTags((product) => product.crystalType)
   },
   {
     key: 'color',
-    label: 'Color',
+    label: t('products.filters.color'),
     tags: getUniqueTags((product) => product.colorTags)
   },
   {
     key: 'energy',
-    label: 'Energy',
+    label: t('products.filters.energy'),
     tags: getUniqueTags((product) => product.energyTags)
   }
 ])

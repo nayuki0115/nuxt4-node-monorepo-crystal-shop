@@ -39,7 +39,7 @@
           <button
             @click="toggleMobileMenu"
             :aria-expanded="isMobileMenuOpen"
-            :aria-label="isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'"
+            :aria-label="isMobileMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')"
             aria-controls="mobile-navigation"
             class="md:hidden p-2 rounded-lg hover:bg-purple-100 transition-colors duration-300"
           >

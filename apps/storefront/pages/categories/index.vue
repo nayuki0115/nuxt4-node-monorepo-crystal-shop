@@ -12,7 +12,7 @@
         <NuxtLink
           v-for="category in categoriesWithIcons"
           :key="category.id"
-          :to="`/categories/${category.id}`"
+          :to="localePath(`/categories/${category.id}`)"
           class="glassmorphism p-8 rounded-2xl text-center hover:scale-105 transition-transform duration-300 group"
         >
           <div class="text-4xl mb-4 group-hover:animate-bounce">{{ category.icon }}</div>
@@ -33,6 +33,7 @@ type CategoryWithMeta = Category & {
 }
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 const { getLocalizedName } = useCategory()
 
 const { data: categories } = await useFetch<Category[]>('http://localhost:4000/categories', {
@@ -45,7 +46,7 @@ const categoriesWithIcons = computed<CategoryWithMeta[]>(() => {
   return categories.value.map((category, index) => ({
     ...category,
     icon: icons[index % icons.length] ?? 'CR',
-    description: `Explore our ${getLocalizedName(category).toLowerCase()} collection`
+    description: t('categories.description', { category: getLocalizedName(category) })
   }))
 })
 </script>

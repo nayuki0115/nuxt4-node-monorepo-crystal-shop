@@ -3,7 +3,7 @@
     <nav class="max-w-7xl mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
         <!-- Logo -->
-        <NuxtLink to="/" class="text-2xl font-light text-purple-800">
+        <NuxtLink :to="localePath('/')" class="text-2xl font-light text-purple-800">
           Crystal Dream
         </NuxtLink>
 
@@ -27,19 +27,19 @@
             @click="switchLocale(locale.code)"
             :class="[
               'px-3 py-1 rounded-full text-sm transition-all duration-300',
-              $i18n.locale === locale.code
+              currentLocale === locale.code
                 ? 'bg-purple-400 text-white shadow-lg'
                 : 'text-purple-600 hover:bg-purple-100'
             ]"
           >
-            {{ locale.name }}
+            {{ locale.shortName }}
           </button>
 
           <!-- Mobile Menu Button -->
           <button
             @click="toggleMobileMenu"
             :aria-expanded="isMobileMenuOpen"
-            :aria-label="isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'"
+            :aria-label="isMobileMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')"
             aria-controls="mobile-navigation"
             class="md:hidden p-2 rounded-lg hover:bg-purple-100 transition-colors duration-300"
           >
@@ -86,11 +86,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Locale } from '../../../packages/types/src/index'
+import { LOCALE_OPTIONS, normalizeLocale, type AppLocale } from '../../../packages/i18n/src/index'
 
-const { t, setLocale } = useI18n()
+const { t, locale, setLocale } = useI18n()
+const localePath = useLocalePath()
 
 const isMobileMenuOpen = ref(false)
+const currentLocale = computed(() => normalizeLocale(locale.value))
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -101,19 +103,16 @@ const closeMobileMenu = () => {
 }
 
 const navItems = computed(() => [
-  { path: '/', label: t('nav.home') },
-  { path: '/products', label: t('nav.products') },
-  { path: '/categories', label: t('nav.categories') },
-  { path: '/about', label: t('nav.about') }
+  { path: localePath('/'), label: t('nav.home') },
+  { path: localePath('/products'), label: t('nav.products') },
+  { path: localePath('/categories'), label: t('nav.categories') },
+  { path: localePath('/about'), label: t('nav.about') }
 ])
 
-const availableLocales: Array<{ code: Locale, name: string }> = [
-  { code: 'zh-TW', name: '繁中' },
-  { code: 'en', name: 'EN' }
-]
+const availableLocales = LOCALE_OPTIONS
 
-const switchLocale = (locale: Locale) => {
-  setLocale(locale)
+const switchLocale = (localeCode: AppLocale) => {
+  setLocale(localeCode)
   closeMobileMenu()
 }
 </script>

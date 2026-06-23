@@ -39,12 +39,12 @@
 
           <!-- Stock -->
           <p class="text-sm text-purple-600">
-            Stock: {{ product.stock }}
+            {{ t('products.stock') }} {{ product.stock }}
           </p>
 
           <!-- Add to Cart Button -->
           <button class="w-full py-4 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-full hover:from-purple-500 hover:to-pink-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-            Add to Cart
+            {{ t('products.addToCart') }}
           </button>
         </div>
       </div>
@@ -56,7 +56,7 @@
 
       <!-- Not found -->
       <div v-else class="text-center py-12">
-        <p class="text-purple-600 text-lg">Product not found</p>
+        <p class="text-purple-600 text-lg">{{ t('products.notFound') }}</p>
       </div>
     </div>
   </div>
@@ -66,6 +66,7 @@
 import type { Product } from '../../../../packages/types/src/index'
 
 const route = useRoute()
+const { t } = useI18n()
 const { getLocalizedName, getLocalizedDescription, getProductTags, formatPrice, getProductImageUrl } = useProduct()
 
 const productSlug = computed(() => String(route.params.slug))

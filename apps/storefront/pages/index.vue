@@ -16,7 +16,7 @@
           {{ t('hero.subtitle') }}
         </p>
         <NuxtLink
-          to="/products"
+          :to="localePath('/products')"
           class="glassmorphism crystal-sheen crystal-glow inline-flex items-center justify-center rounded-full px-10 py-4 text-mist-purple-900 transition-all duration-300 hover:-translate-y-1 hover:bg-white/50 hover:text-mist-purple-950"
         >
           {{ t('hero.cta') }}
@@ -46,6 +46,15 @@
             :product="product"
           />
         </div>
+        <div v-if="featuredProductsPending" class="text-center py-12">
+          <div class="inline-block w-8 h-8 border-4 border-purple-300 border-t-purple-600 rounded-full animate-spin"></div>
+        </div>
+        <div v-else-if="featuredProductsError" class="text-center py-12">
+          <p class="text-mist-purple-600">{{ t('products.loadError') }}</p>
+        </div>
+        <div v-else-if="featuredProducts.length === 0" class="text-center py-12">
+          <p class="text-mist-purple-600">{{ t('products.emptyFeatured') }}</p>
+        </div>
       </div>
     </section>
 
@@ -59,7 +68,7 @@
           <NuxtLink
             v-for="category in categoriesWithIcons"
             :key="category.id"
-            :to="`/categories/${category.id}`"
+            :to="localePath(`/categories/${category.id}`)"
             class="glassmorphism crystal-sheen p-5 sm:p-6 md:p-8 rounded-[1.75rem] text-center hover:-translate-y-1 hover:bg-white/45 transition-all duration-300"
           >
             <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-white/60 bg-gradient-to-br from-white/70 via-mist-purple-100/70 to-moonlight-blue-100/70 text-sm tracking-widest text-champagne-gold-700 shadow-[0_12px_34px_rgba(214,183,255,0.2)]">{{ category.icon }}</div>
@@ -91,13 +100,20 @@ type CategoryWithIcon = Category & {
 }
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 const { getLocalizedName } = useCategory()
 
-const { data: featuredProducts } = await useFetch<Product[]>('http://localhost:4000/featured-products', {
+const {
+  data: featuredProducts,
+  pending: featuredProductsPending,
+  error: featuredProductsError
+} = await useFetch<Product[]>('http://localhost:4000/featured-products', {
+  key: 'home-featured-products',
   default: () => []
 })
 
 const { data: categories } = await useFetch<Category[]>('http://localhost:4000/categories', {
+  key: 'home-categories',
   default: () => []
 })
 

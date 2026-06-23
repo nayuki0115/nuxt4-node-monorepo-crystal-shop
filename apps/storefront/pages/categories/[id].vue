@@ -6,7 +6,7 @@
     <div class="max-w-7xl mx-auto px-4 py-8">
       <div v-if="category" class="mb-12 text-center">
         <h1 class="text-4xl font-light text-purple-800 mb-4">{{ getLocalizedName(category) }}</h1>
-        <p class="text-lg text-purple-600">Explore our {{ getLocalizedName(category).toLowerCase() }} collection</p>
+        <p class="text-lg text-purple-600">{{ t('categories.description', { category: getLocalizedName(category) }) }}</p>
       </div>
 
       <!-- Products Grid -->
@@ -25,7 +25,7 @@
 
       <!-- No products -->
       <div v-else-if="categoryProducts.length === 0" class="text-center py-12">
-        <p class="text-purple-600 text-lg">No products in this category</p>
+        <p class="text-purple-600 text-lg">{{ t('categories.emptyProducts') }}</p>
       </div>
     </div>
   </div>
@@ -35,6 +35,7 @@
 import type { Category, Product } from '../../../../packages/types/src/index'
 
 const route = useRoute()
+const { t } = useI18n()
 const { getLocalizedName } = useCategory()
 
 const categoryId = computed(() => String(route.params.id))

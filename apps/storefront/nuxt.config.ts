@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { DEFAULT_LOCALE, LOCALE_OPTIONS } from '../../packages/i18n/src'
+
 export default defineNuxtConfig({
   srcDir: '.',
   compatibilityDate: '2025-07-15',
@@ -11,11 +13,15 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n'
   ],
   i18n: {
-    locales: [
-      { code: 'zh-TW', name: '繁體中文', iso: 'zh-TW' },
-      { code: 'en', name: 'English', iso: 'en-US' }
-    ],
-    defaultLocale: 'zh-TW',
+    locales: LOCALE_OPTIONS.map(({ code, name, iso }) => ({
+      code,
+      name,
+      language: iso,
+      file: `${code}.json`
+    })),
+    restructureDir: false,
+    langDir: 'locales',
+    defaultLocale: DEFAULT_LOCALE,
     strategy: 'prefix_except_default'
   },
   css: ['@/assets/css/main.css']

@@ -1,3 +1,4 @@
+import { getLocalizedValue } from '../../../packages/i18n/src/index'
 import type { Product } from '../../../packages/types/src/index'
 
 const productImages = import.meta.glob<string>(
@@ -18,18 +19,26 @@ const productImageBySlug = Object.fromEntries(
   })
 )
 
+const normalizeTagKey = (tag: string) => {
+  return tag
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
 export const useProduct = () => {
-  const { $i18n } = useNuxtApp()
+  const { locale, t, te } = useI18n()
 
   const getLocalizedName = (product: Product) => {
-    return product.name[$i18n.locale as 'zh-TW' | 'en'] || product.name['zh-TW']
+    return getLocalizedValue(product.name, locale.value) ?? ''
   }
 
   const getLocalizedDescription = (product: Product) => {
-    return product.description?.[$i18n.locale as 'zh-TW' | 'en'] || product.description?.['zh-TW'] || ''
+    return product.description ? getLocalizedValue(product.description, locale.value) ?? '' : ''
   }
 
-  const getProductTags = (product: Product) => {
+  const getProductTagValues = (product: Product) => {
     return [
       ...product.crystalType,
       ...product.colorTags,
@@ -37,10 +46,22 @@ export const useProduct = () => {
     ].filter(Boolean)
   }
 
+  const getLocalizedTag = (tag: string) => {
+    const key = `productTags.${normalizeTagKey(tag)}`
+
+    return te(key) ? t(key) : tag
+  }
+
+  const getProductTags = (product: Product) => {
+    return getProductTagValues(product).map(getLocalizedTag)
+  }
+
   const formatPrice = (price: number) => {
-    return `$${new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat(locale.value, {
+      style: 'currency',
+      currency: 'TWD',
       maximumFractionDigits: 0
-    }).format(price)}`
+    }).format(price)
   }
 
   const getProductImageUrl = (product: Product) => {
@@ -50,6 +71,8 @@ export const useProduct = () => {
   return {
     getLocalizedName,
     getLocalizedDescription,
+    getLocalizedTag,
+    getProductTagValues,
     getProductTags,
     formatPrice,
     getProductImageUrl

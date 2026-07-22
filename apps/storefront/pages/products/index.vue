@@ -112,7 +112,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Category, Product } from '../../../../packages/types/src/index'
+import type { Category, Product } from '@crystal/types'
 
 const { t } = useI18n()
 const {

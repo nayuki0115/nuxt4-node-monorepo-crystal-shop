@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Category } from '../../../../packages/types/src/index'
+import type { Category } from '@crystal/types'
 
 type CategoryWithMeta = Category & {
   icon: string

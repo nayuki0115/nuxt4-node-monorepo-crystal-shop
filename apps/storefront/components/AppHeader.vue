@@ -86,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { LOCALE_OPTIONS, normalizeLocale, type AppLocale } from '../../../packages/i18n/src/index'
+import { LOCALE_OPTIONS, normalizeLocale, type AppLocale } from '@crystal/i18n'
 
 const { t, locale, setLocale } = useI18n()
 const localePath = useLocalePath()

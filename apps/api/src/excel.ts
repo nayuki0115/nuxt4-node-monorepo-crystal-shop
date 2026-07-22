@@ -6,7 +6,7 @@ import type {
   Product,
   Category,
   Tag
-} from './types'
+} from '@crystal/types'
 
 type ProductRow = {
   id: string

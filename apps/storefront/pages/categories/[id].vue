@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Category, Product } from '../../../../packages/types/src/index'
+import type { Category, Product } from '@crystal/types'
 
 const route = useRoute()
 const { t } = useI18n()

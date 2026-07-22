@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Category, Product } from '../../../packages/types/src/index'
+import type { Category, Product } from '@crystal/types'
 
 type CategoryWithIcon = Category & {
   icon: string

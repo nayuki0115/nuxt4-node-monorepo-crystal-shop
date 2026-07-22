@@ -1,5 +1,5 @@
-import { getLocalizedValue } from '../../../packages/i18n/src/index'
-import type { Product } from '../../../packages/types/src/index'
+import { getLocalizedValue } from '@crystal/i18n'
+import type { Product } from '@crystal/types'
 
 const productImages = import.meta.glob<string>(
   '../assets/images/products/*.{jpg,jpeg,png,webp,avif}',

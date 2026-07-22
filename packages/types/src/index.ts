@@ -1,17 +1,22 @@
-import type { AppLocale } from '../../i18n/src/index'
+export const SUPPORTED_LOCALES = ['zh-TW', 'en'] as const
 
-export type Locale = AppLocale
+export type Locale = typeof SUPPORTED_LOCALES[number]
+
+export type LocalizedText = Record<Locale, string>
+
+export type ProductStatus = 'active' | 'inactive'
+
+export type TagType = 'energy' | 'color'
 
 export type Product = {
   id: string
   slug: string
-  name: Record<Locale, string>
+  name: LocalizedText
   price: number
   imageUrl: string
-  description?: Record<Locale, string>
-  tags?: string[]
+  description: LocalizedText
   category: string
-  status: 'active' | 'inactive'
+  status: ProductStatus
   isFeatured: boolean
   crystalType: string[]
   colorTags: string[]
@@ -21,7 +26,13 @@ export type Product = {
 
 export type Category = {
   id: string
-  name: Record<Locale, string>
+  name: LocalizedText
+}
+
+export type Tag = {
+  id: string
+  name: LocalizedText
+  type: TagType
 }
 
 export type FeaturedProduct = Product

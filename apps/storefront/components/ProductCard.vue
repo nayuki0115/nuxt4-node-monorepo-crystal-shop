@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from '../../../packages/types/src/index'
+import type { Product } from '@crystal/types'
 
 const props = defineProps<{
   product: Product

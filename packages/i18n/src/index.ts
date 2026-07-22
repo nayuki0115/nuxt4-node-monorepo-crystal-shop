@@ -1,6 +1,8 @@
-export const SUPPORTED_LOCALES = ['zh-TW', 'en'] as const
+import { SUPPORTED_LOCALES, type Locale } from '@crystal/types'
 
-export type AppLocale = typeof SUPPORTED_LOCALES[number]
+export { SUPPORTED_LOCALES }
+
+export type AppLocale = Locale
 
 export type LocalizedValue<T = string> = Partial<Record<AppLocale, T>>
 

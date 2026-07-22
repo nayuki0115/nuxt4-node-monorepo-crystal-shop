@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { DEFAULT_LOCALE, LOCALE_OPTIONS } from '../../packages/i18n/src'
+import { DEFAULT_LOCALE, LOCALE_OPTIONS } from '@crystal/i18n'
 
 export default defineNuxtConfig({
   srcDir: '.',

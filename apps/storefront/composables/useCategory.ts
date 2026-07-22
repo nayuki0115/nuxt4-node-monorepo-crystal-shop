@@ -1,5 +1,5 @@
-import { getLocalizedValue } from '../../../packages/i18n/src/index'
-import type { Category } from '../../../packages/types/src/index'
+import { getLocalizedValue } from '@crystal/i18n'
+import type { Category } from '@crystal/types'
 
 export const useCategory = () => {
   const { locale } = useI18n()
